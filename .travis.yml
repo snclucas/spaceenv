@@ -1,0 +1,26 @@
+language: python
+python:
+  - "3.5"
+cache: pip3
+
+env:
+- DB=mongodb MONGODB_URI="mongodb://localhost:27017/testing"
+
+install:
+  - pip install -r requirements.txt
+
+addons:
+  apt:
+    sources:
+      - mongodb-upstart
+      - mongodb-3.0-precise
+    packages:
+      - mongodb-org-server
+      - mongodb-org-shell
+
+before_script:
+  - sleep 15
+
+
+script:
+  - python -m unittest
